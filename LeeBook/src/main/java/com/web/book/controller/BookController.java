@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
+
 public class BookController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(BookController.class);
@@ -17,4 +18,6 @@ public class BookController {
 	public void main() {
 		
 	}
+	
+	//로그인페이지
 }
