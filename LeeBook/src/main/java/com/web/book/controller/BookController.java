@@ -16,6 +16,7 @@ public class BookController {
 	//메인페이지
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
 	public void main() {
+
 		
 	}
 	

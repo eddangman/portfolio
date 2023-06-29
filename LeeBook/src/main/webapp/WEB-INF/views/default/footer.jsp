@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>푸터</title>
-<link rel="stylesheet" href="/resources/css/main.css">
+<link rel="stylesheet" href="/resources/css/footer.css">
 </head>
 <body>
 	<!-- Footer 영역 -->

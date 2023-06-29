@@ -7,18 +7,11 @@
 <head>
 <meta charset="UTF-8">
 <title>헤더</title>
-<link rel="stylesheet" href="../resources/css/main.css">
-<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
-<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
-<script
-  src="https://code.jquery.com/jquery-3.4.1.js"
-  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-  crossorigin="anonymous"></script>
-<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>  
+<link rel="stylesheet" href="../resources/css/header.css">  
 </head>
 <body>
-	<div class="wrapper">
-		<div class="wrap">
+	<div class="wrapper_header">
+		<div class="wrap_header">
 			<div class="top_gnb_area">
 				<ul class="list">
 					<c:if test = "${member == null}">	<!-- 로그인 x -->	
@@ -81,8 +74,7 @@
 							<span>포인트 : <fmt:formatNumber value="${member.point }" pattern="#,###" /></span>
 							<a href="/member/logout.do">로그아웃</a>
 						</div>
-					</c:if>
-					
+					</c:if>					
 				</div>
 				<div class="clearfix"></div>			
 			</div>
@@ -108,6 +100,7 @@
 				    </div>			
 				</div>
 			</div>
-			
+		</div>
+	</div>		
 </body>
 </html>

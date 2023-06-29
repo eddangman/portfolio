@@ -5,16 +5,25 @@
 }
 
 /* 화면 전체 렙 */
-.wrapper{
+.wrapper_join{
+	margin-top:20px;
 	width: 100%;
 	height: 100%;
+	text-align: center;
+	
 		
 }
 
 /* content 랩 */
-.wrap{
+#join_form{
+	
 	width :600px;	
 	margin: auto;
+	display: inline-block;
+	
+}
+.wrap {
+	text-align: left;
 }
 /* 페이지 제목 */
 .subjecet{
@@ -40,6 +49,7 @@
 .id_wrap{
 	width: 100%;
     margin-top: 20px;
+    
 }
 .id_name{
 	font-size: 20px;
@@ -57,16 +67,16 @@
 	font-size:20px;
 	
 }
-	/* 중복아이디 존재하지 않는경우 */
-	.id_input_re_1{
-		color : green;
-		display : none;
-	}
-	/* 중복아이디 존재하는 경우 */
-	.id_input_re_2{
-		color : red;
-		display : none;
-	}
+/* 중복아이디 존재하지 않는경우 */
+.id_input_re_1{
+	color : green;
+	display : none;
+}
+/* 중복아이디 존재하는 경우 */
+.id_input_re_2{
+	color : red;
+	display : none;
+}
 
 /* 비밀번호 영역 */
 .pw_wrap{
@@ -269,6 +279,8 @@
     font-size: 20px;
     font-weight: 900;
     color: #665050;
+    margin-top: -15px;
+	margin-bottom: 20px;   
     
 }
 .join_button:hover{
