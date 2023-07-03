@@ -18,7 +18,6 @@
   integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
   crossorigin="anonymous"></script>
 <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>  
-
 </head>
 <body>
 	<c:import url="default/header.jsp"></c:import>
@@ -113,18 +112,7 @@
 				
 	});
 
-	/* gnb_area 로그아웃 버튼 작동 */
-	$("#gnb_logout_button").click(function(){
-		//alert("버튼 작동");
-		$.ajax({
-			type:"POST",
-			url:"/member/logout.do",
-			success:function(data){
-				alert("로그아웃 성공");
-				document.location.reload();	 
-			} 
-		}); // ajax 
-	});	
+
 </script>
 </body>
 </html>

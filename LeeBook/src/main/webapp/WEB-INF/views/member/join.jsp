@@ -7,12 +7,13 @@
 <head>
 <meta charset="UTF-8">
 <title>회원가입페이지</title>
+<script
+  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
 <link rel="stylesheet"  type="text/css"  href="../resources/css/header.css?v=1.0">
 <link rel="stylesheet"  type="text/css"  href="../resources/css/member/join.css?v=1.0">
 <link rel="stylesheet"  type="text/css"  href="../resources/css/footer.css?v=1.0">
-<script src="https://code.jquery.com/jquery-3.7.0.js"
-	integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
-	crossorigin="anonymous"></script>
 </head>
 <body>	
 <c:import url="../default/header.jsp"></c:import>
@@ -248,7 +249,7 @@ $(".mail_check_button").click(function(){
 		url:"mailCheck?email=" + email,
 		success:function(data){
 			
-			//console.log("data : " + data);
+			console.log("data : " + data);
 			cehckBox.attr("disabled",false);
 			boxWrap.attr("id", "mail_check_input_box_true");
 			code = data;

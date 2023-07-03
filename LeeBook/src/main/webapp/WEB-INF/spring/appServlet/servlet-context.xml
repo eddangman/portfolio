@@ -22,7 +22,16 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="com.web.book" />
-	
+	<interceptors>
+		<interceptor>
+			<mapping path="/member/login.do"></mapping>
+			<beans:bean id="loginIntreceptor" class="com.web.book.interceptor.LoginInterceptor"></beans:bean>
+		</interceptor>
+		<interceptor>
+			<mapping path="/admin/**"></mapping>
+			<beans:bean id="AdminIntreceptor" class="com.web.book.interceptor.AdminInterceptor"></beans:bean>
+		</interceptor>		
+	</interceptors>
 	
 	
 </beans:beans>
