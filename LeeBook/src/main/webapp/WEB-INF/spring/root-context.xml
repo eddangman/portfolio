@@ -17,6 +17,7 @@
 		<property name="jdbcUrl" value="jdbc:oracle:thin:@localhost:1521:xe"/>
 		<property name="username" value="LYS"></property>
 		<property name="password" value="1234"></property>
+		<property name="maximumPoolSize" value="20"/> 
 	</bean>	
 	<!-- 히카리 데이터소스 빈 등록 -->
 	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource">

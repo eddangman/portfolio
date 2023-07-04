@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>헤더</title>
-<link rel="stylesheet" href="../resources/css/header.css">  
+<link rel="stylesheet" href="../resources/css/header.css?v=1.0">  
 <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
 <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
 <script
@@ -15,6 +15,7 @@
   integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
   crossorigin="anonymous"></script>
 <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>  
+
 </head>
 <body>
 	<div class="wrapper_header">

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.web.book.mybatis.AuthorMapper">
+	<!-- 작가 등록 -->
+	<insert id="authorEnroll">
+		insert into leeBook_author values(leeBook_authorId_seq.nextval,#{authorName}, #{nationId}, #{authorIntro},sysdate,sysdate)
+	</insert>
+	
+	<!-- 작가 목록 -->
+	<select id="authorGetList" resultType="com.web.book.model.AuthorVO"> 	
+  	<![CDATA[
+	  	select * from (
+	  		select /*+INDEX_DESC(leeBook_author SYS_C007192) */ 
+	  			rownum as rn, authorId, authorName, nationId, regDate, updateDate
+			from leeBook_author 
+			where
+			 
+	]]>
+		<if test="keyword != null">
+			authorname like '%'||#{keyword}||'%' and
+		</if>
+			
+	<![CDATA[		
+			 rownum <= #{pageNum}*#{amount}
+			)
+		where rn > (#{pageNum} - 1) * #{amount}
+  	]]>	
+	</select>
+	
+	<!-- 작가 수 -->
+	<select id="authorGetTotal" resultType="int">
+
+		select count(*) from leeBook_author
+
+		<if test="keyword != null">
+
+			where authorname like '%' || #{keyword} || '%'
+
+		</if>
+	</select> 
+</mapper>
