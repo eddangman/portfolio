@@ -5,14 +5,77 @@
 <mapper namespace="com.web.book.mybatis.AdminMapper">
 	<!-- 작가 등록 -->
 	<insert id="bookEnroll">
-		insert into lee_book(bookName, authorId, publeYear, publisher, cateCode,
-		bookPrice, bookStock, bookDiscount, bookIntro, bookContents)
-		values(#{bookName},#{authorId},
-		#{publeYear},#{publisher},#{cateCode},#{bookPrice},#{bookStock},#{bookDiscount},#{bookIntro},#{bookContents})
+		insert into lee_book(bookId,bookName, authorId, publeYear, publisher, cateCode,bookPrice, bookStock, bookDiscount, bookIntro, bookContents)
+		values(leeBook_seq.nextval,#{bookName},#{authorId},#{publeYear},#{publisher},#{cateCode},#{bookPrice},#{bookStock},#{bookDiscount},#{bookIntro},#{bookContents})
 	</insert>
 	
 	<!-- 카테고리 리스트 -->
 	<select id="cateList" resultType="com.web.book.model.CateVO">
 		select * from leeBook_bcate order by catecode
 	</select>
+	
+	<!-- 상품 리스트 -->
+	<select id="goodsGetList" resultType="com.web.book.model.BookVO">
+  	
+	  	<![CDATA[
+		select * from(
+		    select /*+INDEX_DESC(lee_book SYS_C007199)*/ rownum as rn, bookId, bookName,
+		        (select authorName from leeBook_author where lee_book.authorId = leeBook_author.authorId) authorName,
+		        (select cateName from leeBook_bcate where lee_book.cateCode = leeBook_bcate.cateCode) cateName,bookStock,regDate
+		    from lee_book 
+		    where 
+		]]>
+
+		<if test="keyword != null">
+
+			bookName like '%' || #{keyword} || '%' and
+
+		</if>
+		     
+		<![CDATA[    
+		    rownum <= #{pageNum} * #{amount} 
+		    )
+		where rn > (#{pageNum} -1) * #{amount}		  	
+  		]]>
+
+	</select>
+
+	<!-- 상품 총 개수 -->
+	<select id="goodsGetTotal" resultType="int">
+		select count(*) from lee_book
+
+		<if test="keyword != null">
+
+			where bookName like '%' || #{keyword} || '%'
+		</if>
+	</select>
+	
+	<!-- 상품 조회 페이지 -->
+	<select id="goodsGetDetail" resultType="com.web.book.model.BookVO">	
+		select bookId, bookName, (select authorName from leeBook_author where authorId =lee_book.authorId) authorName, 
+			authorId, publeYear, publisher, cateCode, bookPrice, bookStock, bookDiscount, bookIntro, bookContents, regDate, updateDate 
+		from lee_book where bookId = #{bookId}	
+	</select>
+	
+	<!-- 상품 정보 수정 -->
+	<update id="goodsModify">		
+		update lee_book set bookName = #{bookName}, authorId = #{authorId}, publeYear = #{publeYear}, publisher = #{publisher}, cateCode = ${cateCode}, 
+		bookPrice = #{bookPrice}, bookStock = #{bookStock}, bookDiscount = #{bookDiscount}, bookIntro = #{bookIntro}, bookContents = #{bookContents}, updateDate = sysdate
+		where bookId = ${bookId}		
+	</update>
+	
+	<!-- 지정 상품 이미지 전체 삭제 --> 
+	<delete id="deleteImageAll">	
+		delete FROM leeBook_image where bookId = #{bookId}
+	</delete>
+	
+	<!-- 지정 상품 이미지 정보 얻기 -->
+	<select id="getAttachInfo" resultType="com.web.book.model.AttachImageVO">	
+		select * from leeBook_image where bookId = #{bookId}	
+	</select>
+	
+	<!-- 상품 정보 삭제 -->
+	<delete id="goodsDelete">	
+		delete from lee_book where bookId = #{bookId}	
+	</delete>
 </mapper>

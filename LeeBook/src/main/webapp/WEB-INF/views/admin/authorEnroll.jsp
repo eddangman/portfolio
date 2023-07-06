@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>작가 등록 페이지</title>
-<link rel="stylesheet" href="../resources/css/admin/authorEnroll.css">
+<link rel="stylesheet" href="../resources/css/admin/authorEnroll.css?v=1.0">
 <script
   src="https://code.jquery.com/jquery-3.4.1.js"
   integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="

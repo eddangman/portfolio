@@ -85,7 +85,7 @@ ul{
 .admin_navi_wrap li a:active {color: black;}
 .admin_navi_wrap li a:hover {color: black;}
 
-.admin_list_01{
+.admin_list_02{
     background-color: #c8c8c8;
 } 
 
@@ -94,9 +94,9 @@ ul{
 .admin_content_wrap{
     width: 80%;
     float:left;
-    min-height:700px;  
+    min-height: 700px;
 }
-.admin_content_subject{			/* 관리자 컨텐츠 제목 영역 */
+.admin_content_subject{	/* 관리자 컨텐츠 제목 영역 */
     font-size: 40px;
     font-weight: bolder;
     padding-left: 15px;
@@ -105,120 +105,107 @@ ul{
     line-height: 80px;
     color: white;	
 }
-/* 관리자 컨텐츠 메인 영역 */
-.form_section{
-	width: 95%;
-    margin-left: 2%;
-    margin-top: 20px;
-    border: 1px solid #dbdde2;
-    background-color: #efefef;	
-}
-.form_section_title{
-	padding: 20px 35px;	
-}
-.form_section_title label{
-	display: block;
-    font-size: 20px;
-    font-weight: 800;
-}
-.form_section_content{
-	padding: 20px 35px;
-    border-top: 1px solid #dbdde2;	
-}
-.form_section_content input{
-	width: 98%;
-    height: 25px;
-    font-size: 20px;
-    padding: 5px 1%;
-}
-.form_section_content select{
-	width: 98%;
-    height: 35px;
-    font-size: 20px;
-    text-align-last: center;
-}
 
-.ck-content {						/* ckeditor 높이 */
-    height: 170px;
+/* 상품 목록 영역 */
+.goods_table_wrap{
+	padding: 20px 35px
 }
-
-
-.ui-datepicker-trigger {			/* 캘린더 css 설정 */
-    margin-left: 25px;
-    width: 14%;
-    height: 38px;
-    font-weight: 600;
-    background-color: #dfe8f5;
-    font-size: 15px;
-    cursor:pointer;
-}
-input[name='publeYear'] {
-    width: 80%;
+.goods_table{
+	width: 100%;
+    border: 1px solid #d3d8e1;
     text-align: center;
+    border-collapse: collapse;
 }
-
-.authorId_btn {						/* 작가 선택 css 설정 */
-    margin-left: 20px;
-    width: 14%;
-    height: 38px;
-    font-weight: 600;
-    background-color: #dfe8f5;
-    font-size: 15px;
-    cursor:pointer;
+.goods_table td{
+	padding: 10px 5px;
+	border : 1px solid #e9ebf0;
 }
-#authorName_input {
-    width: 80%;
+.goods_table thead{
+	background-color: #f8f9fd;	
+	font-weight: 600;
+}
+.goods_table a{
+	color:#1088ed;
+	font-weight: 500;
+}
+.th_column_1{
+	width:11%;
+}
+.th_column_3{
+	width:14%;
+}
+.th_column_4{
+	width:15%;
+}
+.th_column_5{
+	width:10%;
+}	
+.table_empty{
+	height: 50px;
     text-align: center;
-}
-
-.form_section_content select {		/* 카테고리 css 설정 */
-    width: 92%;
-    height: 35px;
-    font-size: 20px;
-    text-align-last: center;
-    margin-left: 5px;
-}
-.cate_wrap span {
-    font-weight: 600;
-}
-.cate_wrap:not(:first-child) {
-    margin-top: 20px;
-}
-
-.ck_warn{						/* 입력란 공란 경고 태그 */
-	display: none;
-    padding-top: 10px;
-    text-align: center;
-    color: #e05757;
-    font-weight: 300;    
-}
-
-.step_val{						/* 할인 가격 문구 */
-	display: block;
-    padding-top: 5px;
-    font-weight: 500;
-}
-
-
-/* 버튼 영역 */
-.btn_section{
-	text-align: center;
-	margin: 80px 0;
-}
-.btn{
-    min-width: 180px;
-    padding: 4px 30px;
+    margin: 200px 0 215px 0px;
     font-size: 25px;
+}
+
+	/* 검색 영역 */
+.search_wrap{
+	margin-top:15px;
+}
+.search_input{
+    position: relative;
+    text-align:center;	
+}
+.search_input input[name='keyword']{
+	padding: 4px 10px;
+    font-size: 15px;
+    height: 20px;
+    line-height: 20px;
+}
+.search_btn{
+	height: 32px;
+    width: 80px;
     font-weight: 600;
+    font-size: 18px;
+    line-height: 20px;
+    position: absolute;
+    margin-left: 15px;
+    background-color: #c3daf7;
+}
+
+
+	/* 페이지 버튼 인터페이스 */
+.pageMaker_wrap{
+	text-align: center;
+    margin-top: 30px;
+    margin-bottom: 40px;
+}
+.pageMaker{
+    list-style: none;
+    display: inline-block;
+}	
+.pageMaker_btn {
+    float: left;
+    width: 40px;
+    height: 40px;
     line-height: 40px;
+    margin-left: 20px;
 }
-.enroll_btn{
-	background-color: #dbdde2;
-	margin-left:15px;
+.active{
+	border : 2px solid black;
+	font-weight:400;
 }
-#enrollBtn:hover {
-    background-color: #c9cbd0;
+.next, .prev {
+    border: 1px solid #ccc;
+    padding: 0 10px;
 }
+.pageMaker_btn a:link {color: black;}
+.pageMaker_btn a:visited {color: black;}
+.pageMaker_btn a:active {color: black;}
+.pageMaker_btn a:hover {color: black;}
+.next a, .prev a {
+    color: #ccc;
+}
+
 
 
 /* footer navai 영역 */
