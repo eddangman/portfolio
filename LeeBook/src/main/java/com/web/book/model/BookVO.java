@@ -50,7 +50,9 @@ public class BookVO {
 	/* 수정 날짜 */
 	private Date updateDate;
 	
-
+	/* 이미지 정보 */
+	private List<AttachImageVO> imageList;
+	
 	public int getBookId() {
 		return bookId;
 	}
@@ -172,14 +174,32 @@ public class BookVO {
 	}
 
 	
+	public List<AttachImageVO> getImageList() {
+		return imageList;
+	}
+
+	public void setImageList(List<AttachImageVO> imageList) {
+		this.imageList = imageList;
+	}
+
 	@Override
 	public String toString() {
 		return "BookVO [bookId=" + bookId + ", bookName=" + bookName + ", authorId=" + authorId + ", authorName="
 				+ authorName + ", publeYear=" + publeYear + ", publisher=" + publisher + ", cateCode=" + cateCode
 				+ ", cateName=" + cateName + ", bookPrice=" + bookPrice + ", bookStock=" + bookStock + ", bookDiscount="
 				+ bookDiscount + ", bookIntro=" + bookIntro + ", bookContents=" + bookContents + ", regDate=" + regDate
-				+ ", updateDate=" + updateDate + "]";
+				+ ", updateDate=" + updateDate + ", imageList=" + imageList + ", getBookId()=" + getBookId()
+				+ ", getBookName()=" + getBookName() + ", getAuthorId()=" + getAuthorId() + ", getAuthorName()="
+				+ getAuthorName() + ", getPubleYear()=" + getPubleYear() + ", getPublisher()=" + getPublisher()
+				+ ", getCateCode()=" + getCateCode() + ", getCateName()=" + getCateName() + ", getBookPrice()="
+				+ getBookPrice() + ", getBookStock()=" + getBookStock() + ", getBookDiscount()=" + getBookDiscount()
+				+ ", getBookIntro()=" + getBookIntro() + ", getBookContents()=" + getBookContents() + ", getRegDate()="
+				+ getRegDate() + ", getUpdateDate()=" + getUpdateDate() + ", getImageList()=" + getImageList()
+				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString()
+				+ "]";
 	}
+
+	
 
 
 	

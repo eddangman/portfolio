@@ -23,11 +23,22 @@ public class AdminServiceImpl implements AdminService{
 	private AdminMapper adminMapper;	
 	
 	/* 상품 등록 */
+	@Transactional
 	@Override
 	public void bookEnroll(BookVO book) {
 		
 		log.info("(srevice)bookEnroll........");
 		adminMapper.bookEnroll(book);
+		
+		if (book.getImageList() == null || book.getImageList().size() <= 0) {
+			return;
+		}
+
+		book.getImageList().forEach(attach -> {			
+			attach.setBookId(book.getBookId());
+			adminMapper.imageEnroll(attach);
+
+		});
 		
 	}
 

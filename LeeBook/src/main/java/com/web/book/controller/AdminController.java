@@ -3,6 +3,7 @@ package com.web.book.controller;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.URLDecoder;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -46,58 +47,59 @@ import net.coobird.thumbnailator.Thumbnails;
 @RequestMapping("/admin")
 public class AdminController {
 	private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
-	
-	
+
 	@Autowired
 	AuthorService authorService;
-	
+
 	@Autowired
 	AdminService adminService;
-	
+
 	/* 관리자 메인 페이지 이동 */
-	@RequestMapping(value="main", method = RequestMethod.GET)
-	public void adminMainGET() throws Exception{
-		
+	@RequestMapping(value = "main", method = RequestMethod.GET)
+	public void adminMainGET() throws Exception {
+
 		logger.info("관리자 페이지 이동");
-		
+
 	}
-	
+
 	/* 작가 등록 페이지 접속 */
 	@RequestMapping(value = "authorEnroll", method = RequestMethod.GET)
 	public void authorEnrollGET() throws Exception {
 		logger.info("작가 등록 페이지 접속");
 	}
-	/* 작가 등록 */
-	@RequestMapping(value="authorEnroll.do", method = RequestMethod.POST)
-	public String authorEnrollPOST(AuthorVO author, RedirectAttributes rttr) throws Exception{
 
-		logger.info("authorEnroll :" +  author);
-		
-		authorService.authorEnroll(author);  	// 작가 등록 쿼리 수행
-		
-		rttr.addFlashAttribute("enroll_result", author.getAuthorName());	// 등록 성공 메시지(작가이름)
-		
+	/* 작가 등록 */
+	@RequestMapping(value = "authorEnroll.do", method = RequestMethod.POST)
+	public String authorEnrollPOST(AuthorVO author, RedirectAttributes rttr) throws Exception {
+
+		logger.info("authorEnroll :" + author);
+
+		authorService.authorEnroll(author); // 작가 등록 쿼리 수행
+
+		rttr.addFlashAttribute("enroll_result", author.getAuthorName()); // 등록 성공 메시지(작가이름)
+
 		return "redirect:/admin/authorManage";
-		
+
 	}
+
 	/* 작가 관리 페이지 접속 */
 	@RequestMapping(value = "authorManage", method = RequestMethod.GET)
-	public void authorManageGET(Criteria cri, Model model) throws Exception{
-		
+	public void authorManageGET(Criteria cri, Model model) throws Exception {
+
 		logger.info("작가 관리 페이지 접속.........." + cri);
-		
+
 		/* 작가 목록 출력 데이터 */
 		List<AuthorVO> list = authorService.authorGetList(cri);
-		
-		if(!list.isEmpty()) {
-			model.addAttribute("list",list);	// 작가 존재 경우
+
+		if (!list.isEmpty()) {
+			model.addAttribute("list", list); // 작가 존재 경우
 		} else {
-			model.addAttribute("listCheck", "empty");	// 작가 존재하지 않을 경우
+			model.addAttribute("listCheck", "empty"); // 작가 존재하지 않을 경우
 		}
-		
+
 		/* 페이지 이동 인터페이스 데이터 */
 		model.addAttribute("pageMaker", new PageDTO(cri, authorService.authorGetTotal(cri)));
-		
+
 	}
 
 	/* 작가 상세, 수정 페이지 */
@@ -155,24 +157,26 @@ public class AdminController {
 		return "redirect:/admin/authorManage";
 
 	}
+
 	/* 상품 등록 페이지 접속 */
 	@RequestMapping(value = "goodsEnroll", method = RequestMethod.GET)
-	public void goodsEnrollGET(Model model) throws Exception{
-		
+	public void goodsEnrollGET(Model model) throws Exception {
+
 		logger.info("상품 등록 페이지 접속");
-		
+
 		ObjectMapper objm = new ObjectMapper();
-		
+
 		List<CateVO> list = adminService.cateList();
-		
+
 		String cateList = objm.writeValueAsString(list);
-		
+
 		model.addAttribute("cateList", cateList);
-		
-		//logger.info("변경 전.........." + list);
-		//logger.info("변경 gn.........." + cateList);
-		
-	}	
+
+		// logger.info("변경 전.........." + list);
+		// logger.info("변경 gn.........." + cateList);
+
+	}
+
 	/* 상품 등록 */
 	@PostMapping("/goodsEnroll")
 	public String goodsEnrollPOST(BookVO book, RedirectAttributes rttr) {
@@ -206,7 +210,7 @@ public class AdminController {
 		/* 페이지 이동 인터페이스 데이터 */
 		model.addAttribute("pageMaker", new PageDTO(cri, authorService.authorGetTotal(cri)));
 	}
-	
+
 	/* 상품 관리(상품목록) 페이지 접속 */
 	@RequestMapping(value = "goodsManage", method = RequestMethod.GET)
 	public void goodsManageGET(Criteria cri, Model model) throws Exception {
@@ -348,6 +352,7 @@ public class AdminController {
 
 		return result;
 	}
+
 	/* 상품 조회 페이지, 상품 수정 페이지 */
 	@GetMapping({ "/goodsDetail", "/goodsModify" })
 	public void goodsGetInfoGET(int bookId, Criteria cri, Model model) throws JsonProcessingException {
@@ -380,7 +385,7 @@ public class AdminController {
 		return "redirect:/admin/goodsManage";
 
 	}
-	
+
 	/* 상품 정보 삭제 */
 	@PostMapping("/goodsDelete")
 	public String goodsDeletePOST(int bookId, RedirectAttributes rttr) {
@@ -416,6 +421,41 @@ public class AdminController {
 		rttr.addFlashAttribute("delete_result", result);
 
 		return "redirect:/admin/goodsManage";
+
+	}
+
+	/* 이미지 파일 삭제 */
+	@PostMapping("/deleteFile")
+	public ResponseEntity<String> deleteFile(String fileName) {
+
+		logger.info("deleteFile........" + fileName);
+
+		File file = null;
+		try {
+			
+			/* 썸네일 파일 삭제 */
+			file = new File("c:\\upload\\" + URLDecoder.decode(fileName, "UTF-8"));
+
+			file.delete();
+
+			/* 원본 파일 삭제 */
+			String originFileName = file.getAbsolutePath().replace("s_", "");
+
+			logger.info("originFileName : " + originFileName);
+
+			file = new File(originFileName);
+
+			file.delete();
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+			return new ResponseEntity<String>("fail", HttpStatus.NOT_IMPLEMENTED);
+
+		} // catch
+
+		return new ResponseEntity<String>("success", HttpStatus.OK);
 
 	}
 }

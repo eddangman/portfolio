@@ -25,6 +25,9 @@ public interface AdminMapper {
 
 	/* 상품 수정 */
 	public int goodsModify(BookVO vo);
+	
+	/* 이미지 등록 */
+	public void imageEnroll(AttachImageVO vo);
 
 	/* 지정 상품 이미지 정보 얻기 */
 	public List<AttachImageVO> getAttachInfo(int bookId);
@@ -34,4 +37,8 @@ public interface AdminMapper {
 
 	/* 상품 정보 삭제 */
 	public int goodsDelete(int bookId);
+	
+	/* 어제자 날짜 이미지 리스트 */
+	public List<AttachImageVO> checkFileList();
+
 }	
