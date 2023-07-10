@@ -2,7 +2,8 @@ package com.web.book.model;
 
 import java.util.Arrays;
 
-public class Criteria{
+public class Criteria {
+
 	/* 현재 페이지 번호 */
 	private int pageNum;
 	
@@ -24,8 +25,6 @@ public class Criteria{
 	/* 상품 번호(댓글 기능에서 사용) */
 	private int bookId;
 	
-	
-
 	/* Criteria 생성자 */
 	public Criteria(int pageNum, int amount) {
 		this.pageNum = pageNum;
@@ -103,4 +102,9 @@ public class Criteria{
 		return "Criteria [pageNum=" + pageNum + ", amount=" + amount + ", type=" + type + ", keyword=" + keyword
 				+ ", authorArr=" + Arrays.toString(authorArr) + ", cateCode=" + cateCode + ", bookId=" + bookId + "]";
 	}
+
+
+
+	
+	
 }

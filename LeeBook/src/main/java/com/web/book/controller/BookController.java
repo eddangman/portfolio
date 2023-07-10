@@ -13,13 +13,18 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.web.book.model.AttachImageVO;
+import com.web.book.model.BookVO;
+import com.web.book.model.Criteria;
+import com.web.book.model.PageDTO;
 import com.web.book.service.AttachService;
+import com.web.book.service.BookService;
 
 @Controller
 public class BookController {
@@ -29,12 +34,15 @@ public class BookController {
 	@Autowired
 	private AttachService attachService;
 
+	@Autowired
+	private BookService bookService;
 	
 	
 	//메인페이지
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
-	public void main() {
-		
+	public void main(Model model) {
+		model.addAttribute("cate1", bookService.getCateCode1());
+		model.addAttribute("cate2", bookService.getCateCode2());
 		
 	}
 	
@@ -73,4 +81,38 @@ public class BookController {
 		return new ResponseEntity<List<AttachImageVO>>(attachService.getAttachList(bookId), HttpStatus.OK);
 
 	}
+	
+	/* 상품 검색 */
+	@GetMapping("/search")
+	public String searchGoodsGET(Criteria cri, Model model) {
+
+		logger.info("cri : " + cri);
+
+		List<BookVO> list = bookService.getGoodsList(cri);
+		logger.info("pre list : " + list);
+		if (!list.isEmpty()) {
+			model.addAttribute("list", list);
+			logger.info("list : " + list);
+		} else {
+			model.addAttribute("listcheck", "empty");
+
+			return "search";
+		}
+
+		model.addAttribute("pageMaker", new PageDTO(cri, bookService.goodsGetTotal(cri)));
+
+		String[] typeArr = cri.getType().split("");
+
+		for (String s : typeArr) {
+			if (s.equals("T") || s.equals("A")) {
+				model.addAttribute("filter_info", bookService.getCateInfoList(cri));
+			}
+		}
+
+		return "search";
+
+	}
+	
+	
+	
 }

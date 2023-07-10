@@ -88,42 +88,41 @@
 			</div>
 			<div class="navi_bar_area">
 				<div class="dropdown">
-				    <button class="dropbtn">국내 
-				      <i class="fa fa-caret-down"></i>
-				    </button>
-				    <div class="dropdown-content">
-				    	<c:forEach items="${cate1}" var="cate"> 
-				    		<a href="search?type=C&cateCode=${cate.cateCode}">${cate.cateName}</a>
-				    	</c:forEach>	      		      		      
-				    </div>			
+					<button class="dropbtn">
+						국내 <i class="fa fa-caret-down"></i>
+					</button>
+					<div class="dropdown-content">
+						<c:forEach items="${cate1}" var="cate">
+							<a href="search?type=C&cateCode=${cate.cateCode}">${cate.cateName}</a>
+						</c:forEach>
+					</div>
 				</div>
 				<div class="dropdown">
-				    <button class="dropbtn">국외 
-				      <i class="fa fa-caret-down"></i>
-				    </button>
-				    <div class="dropdown-content">
-				    	<c:forEach items="${cate2}" var="cate"> 
-				    		<a href="search?type=C&cateCode=${cate.cateCode}">${cate.cateName}</a>
-				    	</c:forEach>     		      		      
-				    </div>			
+					<button class="dropbtn">
+						국외 <i class="fa fa-caret-down"></i>
+					</button>
+					<div class="dropdown-content">
+						<c:forEach items="${cate2}" var="cate">
+							<a href="search?type=C&cateCode=${cate.cateCode}">${cate.cateName}</a>
+						</c:forEach>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-<script type="text/javascript">			
-/* gnb_area 로그아웃 버튼 작동 */
-	$("#gnb_logout_button").click(function(){
+<script type="text/javascript">
+	/* gnb_area 로그아웃 버튼 작동 */
+	$("#gnb_logout_button").click(function() {
 		//alert("버튼 작동");
 		$.ajax({
-			type:"POST",
-			url:"/member/logout.do",
-			success:function(data){
+			type : "POST",
+			url : "/member/logout.do",
+			success : function(data) {
 				alert("로그아웃 성공");
-				document.location.reload();	 
-			} 
+				document.location.reload();
+			}
 		}); // ajax 
 	});
-	
 </script>	
 </body>
 </html>

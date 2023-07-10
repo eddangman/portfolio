@@ -18,12 +18,12 @@
 	
 	<!-- 카테고리 리스트 -->
 	<select id="cateList" resultType="com.web.book.model.CateVO">
-		select * from leeBook_bcate order by catecode
+		select * from leeBook_bcate order by cateCode
 	</select>
 	
 	<!-- 상품 리스트 -->
 	<select id="goodsGetList" resultType="com.web.book.model.BookVO">
-  	
+
 	  	<![CDATA[
 		select * from(
 		    select /*+INDEX_DESC(lee_book SYS_C007199)*/ rownum as rn, bookId, bookName,

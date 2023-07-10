@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.web.book.mybatis.BookMapper">
+ 
+		<!-- criteria(검색조건) -->
+		<sql id="criteria">	
+		<trim prefix="(" suffix=") AND" prefixOverrides="AND">
+			<foreach item="type" collection="typeArr">
+				<trim prefix="AND">
+					<choose>
+						<when test="type == 'A'.toString()">
+							<trim prefixOverrides="or">
+								<foreach collection="authorArr" item="authorId">
+									<trim prefix="or">
+										authorId = #{authorId}
+									</trim>
+								</foreach>
+							</trim>
+						</when>
+						<when test="type == 'C'.toString()">
+							cateCode like '%' || #{cateCode} || '%'
+						</when>
+						<when test="type == 'T'.toString()">
+							bookName like '%' || #{keyword} || '%'
+						</when>
+					</choose>
+				</trim>
+			</foreach>
+		</trim>	
+	    </sql>
+
+	<!-- 상품 검색 -->
+	<select id="getGoodsList" resultType="com.web.book.model.BookVO">
+	
+		<![CDATA[
+		    select * from(
+		        select /*+INDEX_DESC(lee_book SYS_C007199)*/ rownum as rn, bookId, bookName,
+		            (select authorName from leeBook_author where lee_book.authorId = leeBook_author.authorId) authorName, authorId,
+		            (select cateName from leeBook_bcate where lee_book.cateCode = leeBook_bcate.cateCode) cateName, cateCode, publisher, publeYear, bookPrice, bookDiscount  
+		        from lee_book
+		        where 
+	    ]]>
+
+		<include refid="criteria"></include>
+	    
+	    <![CDATA[
+		        rownum <= #{pageNum} * #{amount} 
+	        	)
+	        where rn > (#{pageNum} -1) * #{amount}
+		]]>
+
+	</select>
+	
+	<!-- 상품 총 개수 -->
+	<select id="goodsGetTotal" resultType="int">	
+		select count(*) from lee_book 
+		where
+		<include refid="criteria"></include> 
+		bookId >0		
+	</select>
+	
+	<!-- 작가 id 리스트 요청 -->
+	<select id="getAuthorIdList" resultType="String">	
+		select authorId from leeBook_author where authorName like '%' || #{keyword} || '%'	
+	</select>
+	
+	<!-- 국내 카테고리 리스트 -->
+	<select id="getCateCode1" resultType="com.web.book.model.CateVO">
+	
+		<![CDATA[
+			select * from leeBook_bcate where cateCode > 100000 and cateCode < 200000
+		]]>
+	</select>
+	
+	<!-- 외국 카테고리 리스트 -->
+	<select id="getCateCode2" resultType="com.web.book.model.CateVO">
+	
+		<![CDATA[
+			select * from leeBook_bcate where cateCode > 200000 and cateCode < 300000
+		]]>
+	
+	</select>
+
+	<!-- 검색 대상 카테고리 리스트 -->
+	<select id="getCateList" resultType="String">
+
+		select DISTINCT cateCode from lee_book where
+		<foreach item="type" collection="typeArr">
+			<choose>
+				<when test="type == 'A'.toString()">
+					<trim prefixOverrides="or">
+						<foreach collection="authorArr" item="authorId">
+							<trim prefix="or">
+								authorId = #{authorId}
+							</trim>
+						</foreach>
+					</trim>
+				</when>
+				<when test="type == 'T'.toString()">
+					bookName like '%' || #{keyword} || '%'
+				</when>
+			</choose>
+		</foreach>
+
+	</select>
+
+	<!-- 카테고리 정보(+검색대상 갯수) -->
+	<select id="getCateInfo" resultType="com.web.book.model.CateFilterDTO">
+
+		select DISTINCT count(*) cateCount, a.cateCode, b.cateName from
+		lee_book a left join leeBook_bcate b on a.cateCode = b.cateCode
+
+		where
+
+		<foreach item="type" collection="typeArr">
+			<choose>
+				<when test="type == 'A'.toString()">
+
+					<trim prefix="(" suffix=")" prefixOverrides="or">
+
+						<foreach collection="authorArr" item="authorId">
+
+							<trim prefix="or">
+
+								authorId = #{authorId}
+
+							</trim>
+
+						</foreach>
+
+					</trim>
+
+					and a.cateCode = #{cateCode}
+
+				</when>
+
+				<when test="type == 'T'.toString()">
+
+					bookName like '%' || #{keyword} || '%' and a.cateCode = #{cateCode}
+
+				</when>
+
+			</choose>
+		</foreach>
+
+		group by a.cateCode, b.cateName
+
+	</select>
+</mapper>
