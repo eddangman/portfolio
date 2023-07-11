@@ -6,7 +6,7 @@ public class CateFilterDTO {
 	private String cateName;
 	
 	/* 카테고리 넘버 */
-	private String cateCode;;
+	private String cateCode;
 	
 	/* 카테고리 상품 수 */
 	private int cateCount;	
@@ -28,6 +28,7 @@ public class CateFilterDTO {
 
 	public void setCateCode(String cateCode) {
 		this.cateCode = cateCode;
+		this.cateGroup = cateCode.split("")[0];
 	}
 
 	public int getCateCount() {

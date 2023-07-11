@@ -30,6 +30,12 @@
 		<interceptor>
 			<mapping path="/admin/**"></mapping>
 			<beans:bean id="AdminIntreceptor" class="com.web.book.interceptor.AdminInterceptor"></beans:bean>
+		</interceptor>
+		
+		<interceptor>
+			<mapping path="/cart/**"></mapping>
+			<exclude-mapping path="/cart/add"/>
+			<beans:bean id="CartIntreceptor" class="com.web.book.interceptor.CartInterceptor"></beans:bean>
 		</interceptor>		
 	</interceptors>
 	

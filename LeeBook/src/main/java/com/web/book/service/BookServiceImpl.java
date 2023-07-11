@@ -127,6 +127,14 @@ public class BookServiceImpl implements BookService {
 		return filterInfoList;
 	}
 
+	@Override
+	public BookVO getGoodsInfo(int bookId) {
+		
+		BookVO goodsInfo = bookMapper.getGoodsInfo(bookId);
+		goodsInfo.setImageList(adminMapper.getAttachInfo(bookId));
+		return goodsInfo;
+	}
+
 	
 	
 }
