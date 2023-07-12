@@ -68,9 +68,10 @@
 					<!-- 로그인한 상태 -->
 					<c:if test="${ member != null }">
 						<div class="login_success_area">
-							<span>회원 : ${member.memberName}</span> <span>충전금액 : <fmt:formatNumber
-									value="${member.money }" pattern="\#,###.##" /></span> <span>포인트
-								: <fmt:formatNumber value="${member.point }" pattern="#,###" />
+							<span>회원 : ${member.memberName}</span> <span>충전금액 : 
+							<fmt:formatNumber value="${member.money }" pattern="\#,###.##" /></span> 
+							<span>포인트 : 
+							<fmt:formatNumber value="${member.point }" pattern="#,###" />
 							</span> <a href="/member/logout.do">로그아웃</a>
 						</div>
 					</c:if>
@@ -115,23 +116,18 @@
 						<tbody>
 							<c:forEach items="${cartInfo}" var="ci">
 								<tr>
-									<td class="td_width_1 cart_info_td"><input type="checkbox"
-										class="individual_cart_checkbox input_size_20"
-										checked="checked"> <input type="hidden"
-										class="individual_bookPrice_input" value="${ci.bookPrice}">
-										<input type="hidden" class="individual_salePrice_input"
-										value="${ci.salePrice}"> <input type="hidden"
-										class="individual_bookCount_input" value="${ci.bookCount}">
-										<input type="hidden" class="individual_totalPrice_input"
-										value="${ci.salePrice * ci.bookCount}"> <input
-										type="hidden" class="individual_point_input"
-										value="${ci.point}"> <input type="hidden"
-										class="individual_totalPoint_input" value="${ci.totalPoint}">
-										<input type="hidden" class="individual_bookId_input"
-										value="${ci.bookId}"></td>
+									<td class="td_width_1 cart_info_td">
+									<input type="checkbox" class="individual_cart_checkbox input_size_20" checked="checked"> 
+									<input type="hidden" class="individual_bookPrice_input" value="${ci.bookPrice}">
+									<input type="hidden" class="individual_salePrice_input" value="${ci.salePrice}"> 
+									<input type="hidden"class="individual_bookCount_input" value="${ci.bookCount}">
+									<input type="hidden" class="individual_totalPrice_input" value="${ci.salePrice * ci.bookCount}"> 
+									<input type="hidden" class="individual_point_input" value="${ci.point}"> 
+									<input type="hidden" class="individual_totalPoint_input" value="${ci.totalPoint}">
+									<input type="hidden" class="individual_bookId_input" value="${ci.bookId}"></td>
 									<td class="td_width_2">
 										<div class="image_wrap"
-											data-bookid="${ci.imageList[0].bookId}"
+										    data-bookid="${ci.imageList[0].bookId}"
 											data-path="${ci.imageList[0].uploadPath}"
 											data-uuid="${ci.imageList[0].uuid}"
 											data-filename="${ci.imageList[0].fileName}">
@@ -142,20 +138,19 @@
 									<td class="td_width_4 price_td"><del>
 											정가 :
 											<fmt:formatNumber value="${ci.bookPrice}" pattern="#,### 원" />
-										</del><br> 판매가 : <span class="red_color"><fmt:formatNumber
-												value="${ci.salePrice}" pattern="#,### 원" /></span><br> 마일리지
-										: <span class="green_color"><fmt:formatNumber
-												value="${ci.point}" pattern="#,###" /></span></td>
+										</del><br> 판매가 : <span class="red_color">
+										<fmt:formatNumber value="${ci.salePrice}" pattern="#,### 원" />
+										</span><br> 마일리지: <span class="green_color">
+										<fmt:formatNumber value="${ci.point}" pattern="#,###" /></span></td>
 									<td class="td_width_4 table_text_align_center">
 										<div class="table_text_align_center quantity_div">
-											<input type="text" value="${ci.bookCount}"
-												class="quantity_input">
+											<input type="text" value="${ci.bookCount}" class="quantity_input">
 											<button class="quantity_btn plus_btn">+</button>
 											<button class="quantity_btn minus_btn">-</button>
-										</div> <a class="quantity_modify_btn" data-cartId="${ci.cartId}">변경</a>
+										</div><a class="quantity_modify_btn" data-cartId="${ci.cartId}">변경</a>
 									</td>
-									<td class="td_width_4 table_text_align_center"><fmt:formatNumber
-											value="${ci.salePrice * ci.bookCount}" pattern="#,### 원" />
+									<td class="td_width_4 table_text_align_center">
+									<fmt:formatNumber value="${ci.salePrice * ci.bookCount}" pattern="#,### 원" />
 									</td>
 									<td class="td_width_4 table_text_align_center">
 										<button class="delete_btn" data-cartid="${ci.cartId}">삭제</button>
@@ -232,24 +227,19 @@
 				</div>
 
 				<!-- 수량 조정 form -->
-				<form action="/cart/update" method="post"
-					class="quantity_update_form">
-					<input type="hidden" name="cartId" class="update_cartId"> <input
-						type="hidden" name="bookCount" class="update_bookCount"> <input
-						type="hidden" name="memberId" value="${member.memberId}">
+				<form action="/cart/update" method="post"class="quantity_update_form">
+					<input type="hidden" name="cartId" class="update_cartId"> 
+					<input type="hidden" name="bookCount" class="update_bookCount"> 
+					<input type="hidden" name="memberId" value="${member.memberId}">
 				</form>
 
 				<!-- 삭제 form -->
-				<form action="/cart/delete" method="post"
-					class="quantity_delete_form">
-					<input type="hidden" name="cartId" class="delete_cartId"> <input
-						type="hidden" name="memberId" value="${member.memberId}">
+				<form action="/cart/delete" method="post" class="quantity_delete_form">
+					<input type="hidden" name="cartId" class="delete_cartId"> 
+					<input type="hidden" name="memberId" value="${member.memberId}">
 				</form>
 				<!-- 주문 form -->
-				<form action="/order/${member.memberId}" method="get"
-					class="order_form"></form>
-
-
+				<form action="/order/${member.memberId}" method="get" class="order_form"></form>
 			</div>
 
 			<!-- Footer 영역 -->
@@ -278,8 +268,8 @@
 						<img src="/resources/img/mLogo.png">
 					</div>
 					<div class="footer_right">
-						(주) VamBook 대표이사 : OOO <br> 사업자등록번호 : ooo-oo-ooooo <br>
-						대표전화 : oooo-oooo(발신자 부담전화) <br> <br> COPYRIGHT(C) <strong>kimvampa.tistory.com</strong>
+						(주) leeBook 대표이사 : 이용수 <br> 사업자등록번호 : ooo-oo-ooooo <br>
+						대표전화 : oooo-oooo(발신자 부담전화) <br> <br> COPYRIGHT(C) <strong>eddangman.tistory.com</strong>
 						ALL RIGHTS RESERVED.
 					</div>
 					<div class="clearfix"></div>

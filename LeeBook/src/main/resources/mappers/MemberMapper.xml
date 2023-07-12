@@ -17,4 +17,11 @@
   		<!-- 기존코드 -->
   		<!-- select memberId, memberName, adminck, money, point from book_member where memberId = #{memberId} and memberPw = #{memberPw} -->	
   	</select>
+  	
+  	<!-- 주문자 정보 -->
+  	<select id="getMemberInfo" resultType="com.web.book.model.MemberVO">
+  		SELECT memberId, memberName, memberMail, memberAddr1, memberAddr2, memberAddr3, money, point 
+  		FROM book_member 
+  		WHERE memberId = #{memberId}
+  	</select>
 </mapper>
