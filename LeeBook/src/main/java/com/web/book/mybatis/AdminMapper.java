@@ -6,6 +6,7 @@ import com.web.book.model.AttachImageVO;
 import com.web.book.model.BookVO;
 import com.web.book.model.CateVO;
 import com.web.book.model.Criteria;
+import com.web.book.model.OrderDTO;
 
 public interface AdminMapper {
 	/* 상품 등록 */
@@ -40,5 +41,11 @@ public interface AdminMapper {
 	
 	/* 어제자 날짜 이미지 리스트 */
 	public List<AttachImageVO> checkFileList();
+	
+	/* 주문 상품 리스트 */
+	public List<OrderDTO> getOrderList(Criteria cri);	
+	
+	/* 주문 총 갯수 */
+	public int getOrderTotal(Criteria cri);
 
 }	

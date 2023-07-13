@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.web.book.model.AttachImageVO;
 import com.web.book.model.BookVO;
 import com.web.book.model.Criteria;
+import com.web.book.model.MemberVO;
+import com.web.book.model.OrderDTO;
 import com.web.book.model.PageDTO;
 import com.web.book.service.AttachService;
 import com.web.book.service.BookService;
@@ -39,11 +43,13 @@ public class BookController {
 	private BookService bookService;
 	
 	
+	
 	//메인페이지
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
 	public void main(Model model) {
 		model.addAttribute("cate1", bookService.getCateCode1());
 		model.addAttribute("cate2", bookService.getCateCode2());
+		
 		
 	}
 	

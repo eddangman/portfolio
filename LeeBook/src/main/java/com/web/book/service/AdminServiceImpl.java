@@ -12,6 +12,7 @@ import com.web.book.model.AttachImageVO;
 import com.web.book.model.BookVO;
 import com.web.book.model.CateVO;
 import com.web.book.model.Criteria;
+import com.web.book.model.OrderDTO;
 import com.web.book.mybatis.AdminMapper;
 
 @Service
@@ -117,7 +118,20 @@ public class AdminServiceImpl implements AdminService{
 		return adminMapper.goodsDelete(bookId);
 	}
 	
+	/* 주문 상품 리스트 */
+	@Override
+	public List<OrderDTO> getOrderList(Criteria cri) {
+		return adminMapper.getOrderList(cri);
+	}
+
+	/* 주문 총 갯수 */
+	@Override
+	public int getOrderTotal(Criteria cri) {
+		return adminMapper.getOrderTotal(cri);
+	}
+	
 	
 
+	
 	
 }

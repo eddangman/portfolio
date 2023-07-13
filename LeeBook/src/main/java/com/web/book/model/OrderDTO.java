@@ -170,6 +170,7 @@ public class OrderDTO {
 				+ orderSavePoint + ", orderFinalSalePrice=" + orderFinalSalePrice + "]";
 	}	
 	
+	
 	public void getOrderPriceInfo() {
 		/* 상품 비용 & 적립포인트 */
 			for(OrderItemDTO order : orders) {

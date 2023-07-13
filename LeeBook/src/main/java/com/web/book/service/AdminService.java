@@ -6,6 +6,7 @@ import com.web.book.model.AttachImageVO;
 import com.web.book.model.BookVO;
 import com.web.book.model.CateVO;
 import com.web.book.model.Criteria;
+import com.web.book.model.OrderDTO;
 
 public interface AdminService {
 	
@@ -32,4 +33,10 @@ public interface AdminService {
 
 	/* 상품 정보 삭제 */
 	public int goodsDelete(int bookId);	
+	
+	/* 주문 상품 리스트 */
+	public List<OrderDTO> getOrderList(Criteria cri);
+	
+	/* 주문 총 갯수 */
+	public int getOrderTotal(Criteria cri);
 }

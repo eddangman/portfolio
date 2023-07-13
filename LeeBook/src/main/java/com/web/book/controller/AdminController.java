@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.UUID;
 
 import javax.imageio.ImageIO;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,9 +38,15 @@ import com.web.book.model.AuthorVO;
 import com.web.book.model.BookVO;
 import com.web.book.model.CateVO;
 import com.web.book.model.Criteria;
+import com.web.book.model.MemberVO;
+import com.web.book.model.OrderCancelDTO;
+import com.web.book.model.OrderDTO;
 import com.web.book.model.PageDTO;
+import com.web.book.mybatis.MemberMapper;
+import com.web.book.mybatis.OrderMapper;
 import com.web.book.service.AdminService;
 import com.web.book.service.AuthorService;
+import com.web.book.service.OrderService;
 
 import net.coobird.thumbnailator.Thumbnails;
 
@@ -53,6 +60,11 @@ public class AdminController {
 
 	@Autowired
 	AdminService adminService;
+	
+	@Autowired
+	private OrderService orderService;
+	
+
 
 	/* 관리자 메인 페이지 이동 */
 	@RequestMapping(value = "main", method = RequestMethod.GET)
@@ -457,5 +469,32 @@ public class AdminController {
 
 		return new ResponseEntity<String>("success", HttpStatus.OK);
 
+	}
+	
+	/* 주문 현황 페이지 */
+	@GetMapping("/orderList")
+	public String orderListGET(Criteria cri, Model model) {
+		
+		List<OrderDTO> list = adminService.getOrderList(cri);
+		
+		if(!list.isEmpty()) {
+			model.addAttribute("list", list);
+			model.addAttribute("pageMaker", new PageDTO(cri, adminService.getOrderTotal(cri)));
+		} else {
+			model.addAttribute("listCheck", "empty");
+		}
+				
+		return "/admin/orderList";
+	}	
+	
+	
+	/* 주문삭제 */
+	@PostMapping("/orderCancle")
+	public String orderCanclePOST(OrderCancelDTO dto,HttpSession session) {
+		
+		orderService.orderCancle(dto);		
+		
+		return "redirect:/admin/orderList?keyword=" + dto.getKeyword() + "&amount=" + dto.getAmount() + "&pageNum="
+				+ dto.getPageNum();
 	}
 }

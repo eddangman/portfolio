@@ -563,10 +563,14 @@ $(".order_btn").on("click", function(){
 	$(".goods_table_price_td").each(function(index, element){
 		let bookId = $(element).find(".individual_bookId_input").val();
 		let bookCount = $(element).find(".individual_bookCount_input").val();
+		let totalPrice = $(element).find(".individual_totalPrice_input").val();
 		let bookId_input = "<input name='orders[" + index + "].bookId' type='hidden' value='" + bookId + "'>";
 		form_contents += bookId_input;
 		let bookCount_input = "<input name='orders[" + index + "].bookCount' type='hidden' value='" + bookCount + "'>";
 		form_contents += bookCount_input;
+		let totalPrice_input ="<input name ='orders["+index+"].totalPrice' type='hidden' value='"+totalPrice+ "'>";
+		form_contents += totalPrice_input;
+		
 	});	
 	$(".order_form").append(form_contents);	
 	
