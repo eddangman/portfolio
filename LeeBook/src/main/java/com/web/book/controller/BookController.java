@@ -5,8 +5,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,11 +23,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.web.book.model.AttachImageVO;
 import com.web.book.model.BookVO;
 import com.web.book.model.Criteria;
-import com.web.book.model.MemberVO;
-import com.web.book.model.OrderDTO;
 import com.web.book.model.PageDTO;
+import com.web.book.model.ReplyDTO;
 import com.web.book.service.AttachService;
 import com.web.book.service.BookService;
+import com.web.book.service.ReplyService;
 
 @Controller
 public class BookController {
@@ -42,6 +40,8 @@ public class BookController {
 	@Autowired
 	private BookService bookService;
 	
+	@Autowired
+	private ReplyService replyService;	
 	
 	
 	//메인페이지
@@ -49,6 +49,7 @@ public class BookController {
 	public void main(Model model) {
 		model.addAttribute("cate1", bookService.getCateCode1());
 		model.addAttribute("cate2", bookService.getCateCode2());
+		model.addAttribute("ls", bookService.likeSelect());
 		
 		
 	}
@@ -130,6 +131,26 @@ public class BookController {
 
 		return "/goodsDetail";
 	}
+	/* 리뷰 쓰기 */
+	@GetMapping("/replyEnroll/{memberId}")
+	public String replyEnrollWindowGET(@PathVariable("memberId")String memberId, int bookId, Model model) {
+		BookVO book = bookService.getBookIdName(bookId);
+		model.addAttribute("bookInfo", book);
+		model.addAttribute("memberId", memberId);
+		
+		
+		return "/replyEnroll";
+	}	
 	
+	/* 리뷰 수정 팝업창 */
+	@GetMapping("/replyUpdate")
+	public String replyUpdateWindowGET(ReplyDTO dto, Model model) {
+		BookVO book = bookService.getBookIdName(dto.getBookId());
+		model.addAttribute("bookInfo", book);
+		model.addAttribute("replyInfo", replyService.getUpdateReply(dto.getReplyId()));
+		model.addAttribute("memberId", dto.getMemberId());
+		
+		return "/replyUpdate";
+	}	
 	
 }

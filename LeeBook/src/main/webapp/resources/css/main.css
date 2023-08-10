@@ -5,12 +5,11 @@
 
 /*슬라이드*/
 .slick-prev {
-	left:40px !important;
+	left:5% !important;
 	z-index: 1;
 }
 .slick-next {
-	
-	right: 40px !important;
+	right: 5% !important;
 	z-index: 1; 
 }
 .slick-prev:before {	
@@ -30,7 +29,8 @@
     background: #e6e9f6;
 }
 .image_wrap img{
-	max-width: 85%;
+	max-width: 80%;
+	max-height:80%;
     height: auto;
     display: block;
 	margin: auto;    
@@ -38,11 +38,10 @@
 
 /* 상품 평점순 노출 관련 태그 */
 .ls_wrap{
-    margin: 30px 0 30px 0;
-    padding: 0 10px 0 10px;
+   
 }
 .ls_div_content{
-	width: 80%;
+	width: 50%;
     margin: auto;
     height: 275px;
     border: 1px solid #dadada;

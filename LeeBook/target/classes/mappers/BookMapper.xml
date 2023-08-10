@@ -157,6 +157,25 @@
 		from lee_book a left outer join leeBook_author b on a.authorId = b.authorId
 		left outer join leeBook_bcate c on a.catecode = c.catecode
 		where bookId = ${bookId}
-
 	</select>
+	
+	<select id="getBookIdName" resultType="com.web.book.model.BookVO">	
+		select bookId, bookName from lee_book 
+		where bookId = #{bookId}	
+	</select>	
+	
+	<select id="likeSelect" resultType="com.web.book.model.SelectDTO">
+	
+		select * from
+		(select rownum as rn, bookId, bookName, ratingAvg, (select cateName from leeBook_bcate where lee_book.cateCode = leeBook_bcate.cateCode) as cateName
+		from lee_book
+		order by ratingAvg desc nulls last)
+		<![CDATA[
+		where rn < 9
+		]]>	
+	
+	</select>	
+	
+	
+	
 </mapper>

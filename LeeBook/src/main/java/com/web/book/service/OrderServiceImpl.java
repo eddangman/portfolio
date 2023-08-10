@@ -23,6 +23,7 @@ import com.web.book.mybatis.CartMapper;
 import com.web.book.mybatis.MemberMapper;
 import com.web.book.mybatis.OrderMapper;
 
+@Transactional
 @Service
 public class OrderServiceImpl implements OrderService {
 

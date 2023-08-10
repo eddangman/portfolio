@@ -268,7 +268,7 @@
 				</div>
 
 				<!-- 주문 요청 form -->
-				<form class="order_form" action="/order" method="post">
+				<form class="order_form">
 					<!-- 주문자 회원번호 -->
 					<input name="memberId" value="${memberInfo.memberId}" type="hidden">
 					<!-- 주소록 & 받는이-->
@@ -575,10 +575,25 @@ $(".order_btn").on("click", function(){
 	$(".order_form").append(form_contents);	
 	
 	/* 서버 전송 */
-	$(".order_form").submit();	
+	$.ajax({        
+	    url:'/order', // 카카오페이 결제를 위한 컨트롤러 맵핑 주소
+	    type: 'POST',
+	    dataType: 'json',                   
+	    data: $(".order_form").serialize(),
+	    success: function(data) {              
+	     
+	      alert("카카오페이 결제 성공");
+	      var redirectUrl = data.next_redirect_pc_url;
+	      window.location.href = redirectUrl;
+	    },
+	    error: function(error) {             
+	      // 카카오페이 결제 실패 시 처리할 로직
+	      alert("카카오페이 결제 실패!");
+	    }
+	  });
 	
 });	
-
+    
 
 </script>	
 </body>

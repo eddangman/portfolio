@@ -104,7 +104,7 @@
 		select * 
 		from(
 		    select rownum rn, orderId, memberId, orderstate, orderdate
-		    from leeBook_order
+		    from leeBook_order 
 		    where rownum <= #{pageNum} * #{amount} 
 		]]>    
 		<if test="keyword != null">
@@ -112,7 +112,7 @@
 		</if>
 		<![CDATA[
 		    
-		    order by orderdate desc
+		    order by orderdate asc
 		    )
 		where rn > (#{pageNum} -1) * #{amount}
 		]]>
